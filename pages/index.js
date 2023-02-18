@@ -1,7 +1,15 @@
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
+import { useQuery } from '@tanstack/react-query';
+
+import { getIp } from './services/ip';
 
 export default function Home() {
+  const { data } = useQuery({ queryKey: ['ip'], queryFn: getIp });
+
+  const geo = data?.geo;
+  const ip = data?.ip ?? 'Ip não detectado';
+
   return (
     <div className={styles.container}>
       <Head>
@@ -9,6 +17,12 @@ export default function Home() {
         <meta name="description" content="amplify test" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <div>
+        <p className={styles.ip}>IP: {ip}</p>
+        <p className={styles.geo}>Cidade: {geo?.city ?? 'Cidade não detectada'}</p>
+        <p className={styles.geo}>País: {geo?.country ?? 'País não detectado'}</p>
+        <p className={styles.geo}>Region: {geo?.region ?? 'Região não detectado'}</p>
+      </div>
     </div>
   );
 }

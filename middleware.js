@@ -1,22 +1,14 @@
 import { NextResponse } from 'next/server';
 
 export function middleware(request) {
-  const { headers, geo, ip } = request;
+  const { geo, ip } = request;
 
-  const requestHeaders = new Headers(headers);
-  requestHeaders.set('x-ip', ip);
-  requestHeaders.set('x-geo', geo);
+  const response = NextResponse.next();
 
-  const response = NextResponse.next({
-    request: {
-      // New request headers
-      headers: requestHeaders,
-    },
-  });
+  if (request.nextUrl.pathname.startsWith('/api/ip')) {
+    response.headers.set('x-ip', ip);
+    response.headers.set('x-geo', JSON.stringify(geo));
+  }
 
   return response;
 }
-
-export const config = {
-  matcher: '/',
-};
