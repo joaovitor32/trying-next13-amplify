@@ -26,5 +26,24 @@
       "providerPlugin": "awscloudformation",
       "service": "Cognito"
     }
+  },
+  "geo": {
+    "placeindex4e15d2c7": {
+      "accessType": "AuthorizedAndGuestUsers",
+      "dataProvider": "HERE",
+      "dataSourceIntendedUse": "SingleUse",
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "testeamplify7601ff25"
+        }
+      ],
+      "isDefault": true,
+      "providerPlugin": "awscloudformation",
+      "service": "PlaceIndex"
+    }
   }
 }

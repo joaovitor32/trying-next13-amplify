@@ -9,6 +9,7 @@ export default function Home() {
 
   const geo = data?.geo;
   const ip = data?.ip ?? 'Ip não detectado';
+  const headers = data?.headers;
 
   return (
     <div className={styles.container}>
@@ -23,6 +24,7 @@ export default function Home() {
           <p className={styles.geo}>Cidade: {geo?.city ?? 'Cidade não detectada'}</p>
           <p className={styles.geo}>País: {geo?.country ?? 'País não detectado'}</p>
           <p className={styles.geo}>Região: {geo?.region ?? 'Região não detectado'}</p>
+          <p>Headers: {JSON.stringify(headers)}</p>
         </div>
       ) : null}
     </div>

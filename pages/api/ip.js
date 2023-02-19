@@ -7,6 +7,8 @@ export default async function handler(req, res) {
     return res.status(200).json({
       ip: headers['x-ip'],
       geo: JSON.parse(headers['x-geo']),
+
+      headers,
     });
   } catch (error) {
     const { response } = error;
