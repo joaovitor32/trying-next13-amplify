@@ -4,11 +4,11 @@ import { useQuery } from '@tanstack/react-query';
 
 import getIp from '../globals/services/ip';
 
-export default function Home() {
+export default function Home({ ip }) {
   const { data, isFetched } = useQuery({ queryKey: ['ip'], queryFn: getIp });
 
   const geo = data?.geo;
-  const ip = data?.ip ?? 'Ip não detectado';
+  //const ip = data?.ip ?? 'Ip não detectado';
   const headers = data?.headers;
 
   return (
@@ -29,4 +29,16 @@ export default function Home() {
       ) : null}
     </div>
   );
+}
+
+export async function getServerSideProps({ req }) {
+  try {
+    const ip = req.headers['x-real-ip'] || req.connection.remoteAddress;
+
+    return { props: { ip } };
+  } catch (err) {
+    return {
+      props: {},
+    };
+  }
 }
