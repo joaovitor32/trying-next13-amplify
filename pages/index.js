@@ -1,9 +1,8 @@
-import React from 'react';
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import { useQuery } from '@tanstack/react-query';
 
-import getIp from './services/ip';
+import getIp from '../globals/services/ip';
 
 export default function Home() {
   const { data, isFetched } = useQuery({ queryKey: ['ip'], queryFn: getIp });
