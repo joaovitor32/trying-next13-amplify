@@ -10,4 +10,4 @@ const getIp = async () => {
   };
 };
 
-export { getIp };
+export default getIp;
