@@ -18,27 +18,24 @@ export default function Home({ ip }) {
         <meta name="description" content="amplify test" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {isFetched ? (
+      {/*isFetched ? (
         <div>
           <p className={styles.ip}>IP: {ip}</p>
-          {/*<p className={styles.geo}>Cidade: {geo?.city ?? 'Cidade não detectada'}</p>
+          <p className={styles.geo}>Cidade: {geo?.city ?? 'Cidade não detectada'}</p>
           <p className={styles.geo}>País: {geo?.country ?? 'País não detectado'}</p>
           <p className={styles.geo}>Região: {geo?.region ?? 'Região não detectado'}</p>
-          <p className={styles.geo}>Headers: {JSON.stringify(headers)}</p>*/}
+          <p className={styles.geo}>Headers: {JSON.stringify(headers)}</p>
         </div>
-      ) : null}
+      ) : null/*/}
+
+      <div>
+        <p className={styles.ip}>IP: {ip}</p>
+      </div>
     </div>
   );
 }
 
-export async function getServerSideProps({ req }) {
-  try {
-    const ip = req.headers['x-real-ip'] || req.connection.remoteAddress;
-
-    return { props: { ip } };
-  } catch (err) {
-    return {
-      props: {},
-    };
-  }
-}
+Home.getInitialProps = async ({ req }) => {
+  const ip = req.headers['x-real-ip'] || req.connection.remoteAddress;
+  return { ip };
+};
